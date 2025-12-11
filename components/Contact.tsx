@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 uppercase font-mono tracking-widest">Email Transmission</div>
-                    <div className="text-white font-medium group-hover:text-brand-primary transition-colors">contact@seqedxr.com</div>
+                    <div className="text-white font-medium group-hover:text-brand-primary transition-colors">contact@seqedgames.com</div>
                   </div>
                 </div>
 
@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs text-gray-500 uppercase font-mono tracking-widest">Secure Link</div>
-                    <div className="text-white font-medium group-hover:text-brand-secondary transition-colors">linkedin.com/company/seqedxr</div>
+                    <div className="text-white font-medium group-hover:text-brand-secondary transition-colors">linkedin.com/company/seqedgames</div>
                   </div>
                 </div>
               </div>

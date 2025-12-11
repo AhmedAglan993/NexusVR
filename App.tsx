@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Services from './components/Services';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import AIChatBot from './components/AIChatBot';
 
@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Hero />
         <Services />
         <Projects />
-        <Skills />
+        <Testimonials />
         <Contact />
       </main>
 
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <footer className="bg-black py-8 border-t border-gray-900">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-600 text-sm font-mono">
-            © {new Date().getFullYear()} Seqed XR. All rights reserved.
+            © {new Date().getFullYear()} Seqed Games. All rights reserved.
           </p>
         </div>
       </footer >

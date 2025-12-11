@@ -19,15 +19,15 @@ const Hero: React.FC = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tighter text-white leading-[1.1]">
-          ARCHITECTING <br />
+          WE BUILD <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-white to-brand-secondary text-glow filter drop-shadow-lg">
-            DIGITAL MONUMENTS
+            GAMES FOR BRANDS
           </span>
         </h1>
 
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-          This is <strong className="text-white">Seqed XR</strong>.
-          We build immersive worlds with the precision of the ancients and the power of the future.
+          <strong className="text-white">Seqed Games</strong> specializes in game development for brands, agencies, and businesses. 
+          We create games that drive engagement, not just entertainment.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto">
@@ -49,10 +49,10 @@ const Hero: React.FC = () => {
         {/* Floating Stats */}
         <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl mx-auto">
           {[
-            { value: '35+', label: 'Experiences Built', color: 'border-brand-secondary' },
-            { value: '1M+', label: 'Users Engaged', color: 'border-brand-primary' },
-            { value: 'MENA', label: 'Region Focused', color: 'border-white' },
-            { value: '24/7', label: 'Expert Support', color: 'border-gray-500' }
+            { value: 'Games', label: 'For Brands & Agencies', color: 'border-brand-secondary' },
+            { value: 'MENA', label: 'Regional Expertise', color: 'border-brand-primary' },
+            { value: 'Our', label: 'Clients', color: 'border-white' },
+            { value: 'Results', label: 'Driven by Data', color: 'border-gray-500' }
           ].map((stat, index) => (
             <div key={index} className={`glass-card p-6 border-l-2 ${stat.color} text-left group hover:-translate-y-1 duration-300`}>
               <div className="text-3xl font-mono font-bold text-white mb-1 group-hover:text-brand-primary transition-colors">{stat.value}</div>

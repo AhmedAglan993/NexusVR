@@ -5,21 +5,27 @@ const Services = () => {
     const services = [
         {
             id: 1,
-            title: 'Culturalized Game Porting',
-            description: "We don't just translate; we adapt. Expert localization and culturalization for Western games entering the MENA market (KSA, UAE, Egypt).",
-            icon: 'fa-language'
-        },
-        {
-            id: 2,
-            title: 'Interactive Brand Experiences',
-            description: 'Turn passive marketing into active engagement. We build high-fidelity "Advergames" for web and mobile that drive user retention.',
+            title: 'Branded Games & Advergames',
+            description: 'Create engaging games that promote your brand, product, or campaign. From web-based advergames to mobile brand experiences that drive real engagement and conversions.',
             icon: 'fa-gamepad'
         },
         {
+            id: 2,
+            title: 'Serious Games & Training',
+            description: 'Gamified training and educational experiences that people actually want to use. We build serious games for corporate training, education, and skill development.',
+            icon: 'fa-graduation-cap'
+        },
+        {
             id: 3,
-            title: 'Rapid MVP Prototyping',
-            description: 'Visualize your game idea in weeks, not months. We deliver polished "Vertical Slices" for investors and pre-production validation.',
-            icon: 'fa-rocket'
+            title: 'Game Development for Agencies',
+            description: 'We partner with marketing agencies and studios as their dedicated game development team. From concept to launch, we handle the technical execution.',
+            icon: 'fa-handshake'
+        },
+        {
+            id: 4,
+            title: 'MENA Localization & Culturalization',
+            description: "Adapt Western games for MENA markets with cultural sensitivity. We don't just translate—we culturally adapt games for KSA, UAE, Egypt, and beyond.",
+            icon: 'fa-language'
         }
     ];
 
@@ -40,11 +46,11 @@ const Services = () => {
                         AGENCY <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-secondary">CAPABILITIES</span>
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                        Bridging the gap between global standards and regional cultural nuance.
+                        Game development services for brands, agencies, and businesses. We build games that deliver real business results.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {services.map((service) => (
                         <div
                             key={service.id}

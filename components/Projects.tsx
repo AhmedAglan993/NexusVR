@@ -177,14 +177,14 @@ const Projects: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">Studio Labs</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">Our Work</h2>
             <div className="h-1 w-20 bg-brand-primary rounded shadow-[0_0_10px_theme('colors.brand-primary')]"></div>
             <p className="text-gray-400 mt-4 max-w-xl text-lg font-light">
-              Where we experiment with next-gen mechanics, shaders, and AI. These are our technical proofs of concept.
+              Explore our portfolio of games built for brands, agencies, and businesses. Each project is designed to deliver measurable results.
             </p>
           </div>
           <p className="text-gray-500 font-mono mt-4 md:mt-0 opacity-50">
-            // R&D SHOWCASE
+            // GAME PORTFOLIO
           </p>
         </div>
 

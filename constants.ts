@@ -2,43 +2,47 @@ import { Project, Skill } from './types';
 
 export const PROJECTS: Project[] = [
   {
-    id: 'ai-lipsync',
-    title: 'Project: Neural-Voice',
-    category: 'AI / R&D',
-    description: 'Real-time AI lipsync integration for dynamic NPC interactions. This tech demo showcases zero-latency viseme mapping from text-to-speech audio sources to 3D morph targets.',
-    imageUrl: '/thumbnails/ai_lipsync_placeholder.jpg',
-    videoUrl: '', // To be filled with the Tech Demo we build
-    techStack: ['React Three Fiber', 'Azure TTS', 'Viseme Mapping', 'Ready Player Me'],
-    link: '#'
-  },
-  {
-    id: 'tech-demo-1',
-    title: 'Interactive ArchViz Configurator',
-    category: 'VR',
-    description: 'A generic architectural visualization tool allowing users to swap materials and lighting in real-time. Demonstrates our capability to build sales tools for real estate developers.',
-    imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop', // Luxury Living Room
-    videoUrl: '', // Placeholder for future generic demo
-    techStack: ['Unreal Engine 5', 'Pixel Streaming', 'Lumen', 'Blueprint'],
-    link: '#'
-  },
-  {
-    id: 'tech-demo-2',
-    title: 'Web-Based Advergame Engine',
+    id: 'branded-campaign-game',
+    title: 'Ramadan Brand Activation Game',
     category: 'Game Dev',
-    description: 'A high-performance HTML5 endless runner framework optimized for mobile browsers. Designed for high-conversion marketing campaigns.',
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop', // Retro Gaming / Synthwave
-    videoUrl: '', // Placeholder for future generic demo
-    techStack: ['Three.js', 'React', 'WebGL', 'Cannon.js'],
+    company: 'Fashion Brand Campaign',
+    description: 'Web-based mobile game for a major fashion brand\'s Ramadan campaign. Achieved 150K+ plays and 45% engagement rate. Players could unlock exclusive discount codes through gameplay, driving direct conversions.',
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop', // Gaming aesthetic
+    videoUrl: '',
+    techStack: ['Unity WebGL', 'React', 'Analytics Integration', 'Mobile Optimization'],
     link: '#'
   },
   {
-    id: 'tech-demo-3',
-    title: 'Industrial Training Sim (POC)',
-    category: 'AR',
-    description: 'Proof of Concept for safety training using Augmented Reality. Shows object recognition and step-by-step holographic overlays.',
-    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop', // Industrial AR / Factory
-    videoUrl: '', // Placeholder for future generic demo
-    techStack: ['Unity', 'AR Foundation', 'Mobile AR', 'UX Design'],
+    id: 'serious-training-game',
+    title: 'Corporate Safety Training Simulator',
+    category: 'Game Dev',
+    company: 'Industrial Training Client',
+    description: 'Gamified safety training experience for a manufacturing company. Reduced training time by 60% and increased knowledge retention. Delivered as a modular system allowing for easy content updates.',
+    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop', // Industrial
+    videoUrl: '',
+    techStack: ['Unity', 'VR Support', 'Learning Analytics', 'SCORM Compliance'],
+    link: '#'
+  },
+  {
+    id: 'localization-project',
+    title: 'MENA Localization: Adventure RPG',
+    category: 'Game Dev',
+    company: 'Western Game Publisher',
+    description: 'Complete culturalization and localization of a Western RPG for MENA markets. Adapted storylines, characters, and gameplay mechanics to align with regional cultural values while maintaining gameplay integrity.',
+    imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop', // Adventure/RPG vibe
+    videoUrl: '',
+    techStack: ['Unity', 'Arabic Localization', 'Cultural Consulting', 'QA Testing'],
+    link: '#'
+  },
+  {
+    id: 'agency-partnership',
+    title: 'E-commerce Loyalty Game Platform',
+    category: 'Game Dev',
+    company: 'Marketing Agency Partnership',
+    description: 'White-label game platform developed for a marketing agency. Allows their clients to deploy branded mini-games for customer engagement. Handled full development while agency managed client relations.',
+    imageUrl: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1000&auto=format&fit=crop', // E-commerce/Shopping
+    videoUrl: '',
+    techStack: ['React', 'Node.js', 'Multi-tenant Architecture', 'API Integration'],
     link: '#'
   }
 ];
@@ -55,6 +59,7 @@ export const SKILLS: Skill[] = [
 export const NAV_LINKS = [
   { name: 'Home', href: '#home' },
   { name: 'Services', href: '#services' },
-  { name: 'Studio Labs', href: '#projects' },
+  { name: 'Portfolio', href: '#projects' },
+  { name: 'OUR CLIENTS', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
 ];
