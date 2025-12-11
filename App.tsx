@@ -1,25 +1,36 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
+import Navbar from './components/Navbar';
 import Services from './components/Services';
-import AIEventPlanner from './components/AIEventPlanner';
-import Portfolio from './components/Portfolio';
+import Hero from './components/Hero';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
+import AIChatBot from './components/AIChatBot';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-cyan-500 selection:text-black font-sans">
-      <Header />
+    <div className="min-h-screen relative">
+      <Navbar />
       <main>
         <Hero />
         <Services />
-        <AIEventPlanner />
-        <Portfolio />
+        <Projects />
+        <Skills />
         <Contact />
       </main>
-      <Footer />
-    </div>
+
+      {/* Footer */}
+      <footer className="bg-black py-8 border-t border-gray-900">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-gray-600 text-sm font-mono">
+            © {new Date().getFullYear()} Ahmed Aglan. All rights reserved.
+          </p>
+        </div>
+      </footer >
+
+      {/* The Digital Twin Assistant */}
+      < AIChatBot />
+    </div >
   );
 };
 

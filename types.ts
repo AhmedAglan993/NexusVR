@@ -1,28 +1,25 @@
-export interface ServiceItem {
+export interface Project {
+  id: string;
   title: string;
+  category: 'VR' | 'AR' | 'Game Dev' | 'Tech Art' | 'AI / R&D';
+  company?: string;
   description: string;
-  icon: string;
+  imageUrl: string;
+  videoUrl?: string;
+  techStack: string[];
+  link?: string;
 }
 
-export interface PortfolioItem {
-  id: number;
-  client: string;
-  title: string;
-  image: string;
-  description: string;
+export interface Skill {
+  name: string;
+  level: number; // 0 to 100
+  icon: string; // FontAwesome class
+  color: string;
 }
 
-export interface PlannerFormData {
-  teamSize: number;
-  eventType: string;
-  goals: string;
-  duration: string;
-}
-
-export interface VRRecommendation {
-  title: string;
-  description: string;
-  hardware: string;
-  estimatedBudget: string;
-  activities: string[];
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'model';
+  text: string;
+  isThinking?: boolean;
 }

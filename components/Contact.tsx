@@ -1,78 +1,105 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
+  const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.current) return;
+
+    setStatus('sending');
+
+    // REPLACE THESE WITH YOUR ACTUAL KEYS FROM EMAILJS DASHBOARD
+    // Sign up at https://www.emailjs.com/
+    const SERVICE_ID = 'service_m58f2w1';
+    const TEMPLATE_ID = 'template_omofbst';
+    const PUBLIC_KEY = '8rCZ_cSY2cdkfLzWx';
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+        console.log(result.text);
+        setStatus('success');
+        if (form.current) form.current.reset();
+      }, (error) => {
+        console.log(error.text);
+        setStatus('error');
+      });
+  };
+
   return (
-    <section id="contact" className="py-24 bg-black relative border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16">
-          
-          <div>
-            <h2 className="text-4xl font-extrabold text-white mb-6">Ready to enter the <br/> <span className="text-cyan-400">Next Dimension?</span></h2>
-            <p className="text-gray-400 text-lg mb-12">
-              Get in touch to discuss your next team building event, brand activation, or custom development needs.
-            </p>
+    <section id="contact" className="py-24 relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-neon-blue/5 to-transparent pointer-events-none"></div>
 
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Mail className="text-cyan-400 w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-medium mb-1">Email Us</h4>
-                  <p className="text-gray-400">hello@nexusvr.agency</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Phone className="text-purple-500 w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-white font-medium mb-1">Call Us</h4>
-                  <p className="text-gray-400">+1 (555) 000-VRVR</p>
-                </div>
-              </div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-2xl border border-neon-blue/20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-zinc-900 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MapPin className="text-pink-500 w-5 h-5" />
+            {/* Contact Info */}
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-6">Start a Collaboration</h2>
+              <p className="text-gray-400 mb-8">
+                Ready to bring your virtual concepts to reality? Whether you need a full-scale game production, a VR training module, or an AR marketing campaign, our team is ready to deploy.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 group cursor-pointer">
+                  <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-neon-blue group-hover:bg-neon-blue group-hover:text-black transition-all">
+                    <i className="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 uppercase font-mono">Email</div>
+                    <div className="text-white font-medium">ahmedaglan993@gmail.com</div>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-white font-medium mb-1">Studio</h4>
-                  <p className="text-gray-400">101 Digital Avenue<br/>San Francisco, CA 94107</p>
+
+                <div className="flex items-center gap-4 group cursor-pointer">
+                  <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-neon-purple group-hover:bg-neon-purple group-hover:text-black transition-all">
+                    <i className="fa-brands fa-linkedin"></i>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 uppercase font-mono">LinkedIn</div>
+                    <div className="text-white font-medium">linkedin.com/in/ahmad-m-aglan</div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Form */}
+            <form ref={form} onSubmit={sendEmail} className="space-y-4">
+              <div>
+                <label className="block text-xs font-mono text-gray-400 mb-1">IDENTIFIER (NAME)</label>
+                <input type="text" name="user_name" className="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-neon-blue focus:outline-none transition-colors" placeholder="John Doe" required />
+              </div>
+              <div>
+                <label className="block text-xs font-mono text-gray-400 mb-1">TRANSMISSION (EMAIL)</label>
+                <input type="email" name="user_email" className="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-neon-blue focus:outline-none transition-colors" placeholder="john@company.com" required />
+              </div>
+              <div>
+                <label className="block text-xs font-mono text-gray-400 mb-1">DATA PACKET (MESSAGE)</label>
+                <textarea name="message" rows={4} className="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-neon-blue focus:outline-none transition-colors" placeholder="Tell me about your project..." required></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === 'sending' || status === 'success'}
+                className={`w-full py-3 border font-bold uppercase tracking-wider rounded transition-all duration-300 ${status === 'success'
+                  ? 'bg-green-500/20 border-green-500 text-green-500'
+                  : status === 'error'
+                    ? 'bg-red-500/20 border-red-500 text-red-500'
+                    : 'bg-white/5 border-neon-blue/50 text-neon-blue hover:bg-neon-blue hover:text-black'
+                  }`}
+              >
+                {status === 'idle' && 'Send Message'}
+                {status === 'sending' && 'Transmitting...'}
+                {status === 'success' && 'Transmission Complete'}
+                {status === 'error' && 'Transmission Failed'}
+              </button>
+            </form>
+
           </div>
-
-          <form className="bg-zinc-900 p-8 rounded-2xl border border-zinc-800">
-            <div className="grid grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">First Name</label>
-                <input type="text" className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 outline-none" placeholder="John" />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">Last Name</label>
-                <input type="text" className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 outline-none" placeholder="Doe" />
-              </div>
-            </div>
-            
-            <div className="mb-6">
-              <label className="block text-sm text-gray-400 mb-2">Email Address</label>
-              <input type="email" className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 outline-none" placeholder="john@company.com" />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm text-gray-400 mb-2">Message</label>
-              <textarea rows={4} className="w-full bg-black/50 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 outline-none" placeholder="Tell us about your event..." />
-            </div>
-
-            <button type="submit" className="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-cyan-400 transition-colors flex items-center justify-center gap-2">
-              Send Message <Send size={18} />
-            </button>
-          </form>
-
         </div>
       </div>
     </section>
