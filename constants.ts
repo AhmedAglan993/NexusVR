@@ -44,12 +44,12 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS: Skill[] = [
-  { name: 'Team Leadership', level: 100, icon: 'fa-solid fa-users-gear', color: 'text-neon-blue' },
-  { name: 'Project Management', level: 95, icon: 'fa-solid fa-list-check', color: 'text-neon-purple' },
-  { name: 'Unity (C#)', level: 90, icon: 'fa-brands fa-unity', color: 'text-white' },
-  { name: 'Unreal (Blueprints)', level: 90, icon: 'fa-gamepad', color: 'text-blue-400' },
-  { name: 'C# Programming', level: 90, icon: 'fa-code', color: 'text-green-400' },
-  { name: 'Full Cycle Dev', level: 100, icon: 'fa-solid fa-infinity', color: 'text-yellow-400' },
+  { name: 'XR Development', level: 100, icon: 'fa-brands fa-unity', color: 'text-white' },
+  { name: 'Game Engineering', level: 95, icon: 'fa-solid fa-code', color: 'text-brand-primary' },
+  { name: 'Vision Architecture', level: 100, icon: 'fa-solid fa-compass-drafting', color: 'text-brand-secondary' }, // Renamed from Project Leadership
+  { name: '3D Optimization', level: 90, icon: 'fa-solid fa-cube', color: 'text-blue-400' },
+  { name: 'Immersive UX', level: 90, icon: 'fa-solid fa-vr-cardboard', color: 'text-green-400' },
+  { name: 'Full-Cycle Production', level: 100, icon: 'fa-solid fa-infinity', color: 'text-yellow-400' },
 ];
 
 export const NAV_LINKS = [

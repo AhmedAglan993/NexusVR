@@ -2,12 +2,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #050505;
-  --color-brand-primary: #00F3FF;
-  --color-brand-secondary: #7000FF;
-  --color-brand-accent: #FF0055;
-  --color-neon-blue: #00F3FF;
-  --color-neon-purple: #BC13FE;
+  --color-brand-dark: #0B0F19;
+  /* Deep Night Sky */
+  --color-brand-primary: #D4AF37;
+  /* Sandstone Gold */
+  --color-brand-secondary: #2563EB;
+  /* Lapis Lazuli Blue */
+  --color-brand-accent: #00F0FF;
+  /* Nile Cyan (Innovation) */
+  --color-brand-surface: #131B2C;
+  /* Lighter navy for cards */
 
   --font-sans: "Outfit", sans-serif;
   --font-mono: "Space Mono", monospace;

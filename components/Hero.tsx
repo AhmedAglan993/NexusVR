@@ -19,15 +19,15 @@ const Hero: React.FC = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tighter text-white leading-[1.1]">
-          CRAFTING <br />
+          ARCHITECTING <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-white to-brand-secondary text-glow filter drop-shadow-lg">
-            NEXT-GEN REALITIES
+            DIGITAL MONUMENTS
           </span>
         </h1>
 
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-          We are <strong className="text-white">NexusVR</strong>.
-          The premier XR studio bridging cutting-edge immersive technology with Middle Eastern heritage.
+          This is <strong className="text-white">Seqed XR</strong>.
+          We build immersive worlds with the precision of the ancients and the power of the future.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto">

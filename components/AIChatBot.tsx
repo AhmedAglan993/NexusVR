@@ -172,10 +172,10 @@ const AIChatBot: React.FC = () => {
       <style>{styles}</style>
       {/* Chat Window */}
       {isOpen && (
-        <div className="glass-panel w-80 md:w-96 h-[600px] mb-4 rounded-xl flex flex-col overflow-hidden shadow-2xl shadow-neon-blue/20 border-neon-blue/30 border">
+        <div className="glass-card w-80 md:w-96 h-[600px] mb-4 rounded-xl flex flex-col overflow-hidden shadow-2xl shadow-brand-primary/20 border-brand-primary/30 border">
 
           {/* Avatar Hologram Header */}
-          <div className="relative h-48 bg-black border-b border-neon-blue/30 overflow-hidden shrink-0">
+          <div className="relative h-48 bg-black border-b border-brand-primary/30 overflow-hidden shrink-0">
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(0, 243, 255, .3) 25%, rgba(0, 243, 255, .3) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .3) 75%, rgba(0, 243, 255, .3) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 243, 255, .3) 25%, rgba(0, 243, 255, .3) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .3) 75%, rgba(0, 243, 255, .3) 76%, transparent 77%, transparent)', backgroundSize: '30px 30px' }}></div>
 
@@ -196,11 +196,11 @@ const AIChatBot: React.FC = () => {
             {/* Header Controls Overlay */}
             <div className="absolute top-2 right-2 flex gap-2 z-10">
               {isSpeaking && (
-                <button onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); }} className="bg-black/50 p-1 rounded hover:bg-red-500/20 text-white/50 hover:text-white transition-colors">
+                <button onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); }} className="bg-black/50 p-1.5 rounded hover:bg-red-500/20 text-white/50 hover:text-white transition-colors">
                   <i className="fa-solid fa-volume-xmark"></i>
                 </button>
               )}
-              <button onClick={toggleChat} className="bg-black/50 p-1 rounded hover:bg-white/10 text-white/50 hover:text-white transition-colors">
+              <button onClick={toggleChat} className="bg-black/50 p-1.5 rounded hover:bg-white/10 text-white/50 hover:text-white transition-colors">
                 <i className="fa-solid fa-xmark"></i>
               </button>
             </div>
@@ -215,19 +215,19 @@ const AIChatBot: React.FC = () => {
               >
                 <div
                   className={`max-w-[85%] rounded-lg p-3 text-sm font-mono leading-relaxed ${msg.role === 'user'
-                    ? 'bg-neon-blue/20 text-white border border-neon-blue/30'
-                    : 'bg-gray-800/90 text-gray-200 border border-gray-700'
+                    ? 'bg-brand-primary/20 text-white border border-brand-primary/30'
+                    : 'bg-white/5 text-gray-200 border border-white/10'
                     }`}
                 >
                   {/* Bot Icon for model messages */}
-                  {msg.role === 'model' && <i className="fa-solid fa-robot mr-2 text-neon-blue text-xs"></i>}
+                  {msg.role === 'model' && <i className="fa-solid fa-robot mr-2 text-brand-primary text-xs"></i>}
                   {msg.text}
                 </div>
               </div>
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-gray-800/80 text-neon-blue text-xs p-2 rounded animate-pulse font-mono border border-gray-700">
+                <div className="bg-white/5 text-brand-primary text-xs p-2 rounded animate-pulse font-mono border border-white/10">
                   <i className="fa-solid fa-microchip mr-2 animate-spin"></i> Processing...
                 </div>
               </div>
@@ -236,14 +236,14 @@ const AIChatBot: React.FC = () => {
           </div>
 
           {/* Input */}
-          <form onSubmit={(e) => handleSend(e)} className="p-3 bg-neon-panel border-t border-gray-700">
+          <form onSubmit={(e) => handleSend(e)} className="p-3 bg-brand-dark/95 border-t border-white/10">
             <div className="relative flex gap-2">
               <button
                 type="button"
                 onClick={toggleListening}
                 className={`w-10 flex items-center justify-center rounded border transition-all ${isListening
                   ? 'bg-red-500/20 border-red-500 text-red-500 animate-pulse'
-                  : 'bg-black/50 border-gray-600 text-neon-blue hover:border-neon-blue'
+                  : 'bg-black/50 border-gray-600 text-brand-primary hover:border-brand-primary'
                   }`}
               >
                 <i className={`fa-solid ${isListening ? 'fa-microphone-lines' : 'fa-microphone'}`}></i>
@@ -254,12 +254,12 @@ const AIChatBot: React.FC = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={isListening ? "Listening..." : "Ask Nexus..."}
-                className="flex-1 bg-black/50 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-neon-blue transition-colors font-mono"
+                className="flex-1 bg-black/50 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-primary transition-colors font-mono placeholder-gray-500"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="w-10 h-full flex items-center justify-center text-neon-blue hover:text-white transition-colors disabled:opacity-50"
+                className="w-10 h-full flex items-center justify-center text-brand-primary hover:text-white transition-colors disabled:opacity-50"
               >
                 <i className="fa-solid fa-paper-plane"></i>
               </button>
@@ -271,15 +271,18 @@ const AIChatBot: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleChat}
-        className={`${isOpen ? 'bg-gray-800' : 'bg-neon-blue'
-          } text-white w-14 h-14 rounded-full shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center group relative border-2 border-white/10`}
+        className={`${isOpen ? 'bg-gray-800' : 'bg-brand-primary'
+          } text-black w-16 h-16 rounded-full shadow-[0_0_20px_rgba(0,243,255,0.4)] hover:scale-110 transition-all duration-300 flex items-center justify-center group relative border-2 border-white/10`}
       >
         {/* Notification Dot */}
         {!isOpen && (
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+          <span className="absolute top-0 right-0 w-4 h-4 bg-brand-secondary rounded-full animate-ping"></span>
         )}
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
-        <i className={`fa-solid ${isOpen ? 'fa-minus' : 'fa-headset'} text-xl ${isOpen ? 'text-white' : 'text-black'}`}></i>
+        {!isOpen && (
+          <span className="absolute top-0 right-0 w-4 h-4 bg-brand-secondary rounded-full"></span>
+        )}
+
+        <i className={`fa-solid ${isOpen ? 'fa-minus' : 'fa-headset'} text-2xl ${isOpen ? 'text-white' : 'text-black'}`}></i>
       </button>
     </div>
   );
