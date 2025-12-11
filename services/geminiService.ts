@@ -49,29 +49,26 @@ let client: GoogleGenAI | null = null;
 
 export const getGeminiClient = (): GoogleGenAI => {
   if (!client) {
-    // Try multiple ways to get the API key
-    // 1. From process.env (replaced by Vite define at build time)
-    // 2. From import.meta.env (Vite's native way, requires VITE_ prefix)
-    const apiKey = 
-      process.env.API_KEY || 
-      process.env.GEMINI_API_KEY ||
-      (import.meta.env as any).VITE_GEMINI_API_KEY ||
-      (import.meta.env as any).GEMINI_API_KEY;
+    // Get API key from process.env (replaced by Vite define at build time)
+    // This works for both local (.env.local) and production (Netlify/Vercel env vars)
+    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
     
     // Debug logging
     console.log("Checking for API key...");
     console.log("process.env.API_KEY:", process.env.API_KEY ? `Found (length: ${process.env.API_KEY.length})` : "Not found");
     console.log("process.env.GEMINI_API_KEY:", process.env.GEMINI_API_KEY ? `Found (length: ${process.env.GEMINI_API_KEY.length})` : "Not found");
-    console.log("import.meta.env.VITE_GEMINI_API_KEY:", (import.meta.env as any).VITE_GEMINI_API_KEY ? `Found` : "Not found");
     
     if (!apiKey || apiKey === 'undefined' || apiKey === 'null' || apiKey === '') {
       console.error("API_KEY is missing from environment variables");
-      console.error("This usually means:");
-      console.error("1. The .env.local file doesn't exist or doesn't contain GEMINI_API_KEY");
-      console.error("2. The dev server needs to be restarted after creating/updating .env.local");
-      console.error("3. The vite.config.ts define replacement isn't working");
-      throw new Error("API Key missing. Please ensure GEMINI_API_KEY is set in .env.local and restart the dev server.");
+      console.error("For LOCAL development:");
+      console.error("1. Create .env.local file with GEMINI_API_KEY=your_key");
+      console.error("2. Restart the dev server (npm run dev)");
+      console.error("For PRODUCTION (Netlify/Vercel):");
+      console.error("1. Set GEMINI_API_KEY in your hosting platform's Environment Variables");
+      console.error("2. Trigger a new deployment");
+      throw new Error("API Key missing. Check console for setup instructions.");
     }
+    
     console.log("Initializing Gemini client with API key (length:", apiKey.length, ")");
     client = new GoogleGenAI({ apiKey });
   }
@@ -99,8 +96,8 @@ export const sendMessageToGemini = async (message: string, history: { role: 'use
       history: chatHistory
     });
 
-    // Send message - the message should be a PartListUnion (string or Part[])
-    const result = await chat.sendMessage(message);
+    // Send message - sendMessage accepts SendMessageParameters with message property
+    const result = await chat.sendMessage({ message });
 
     // Extract text from response using the .text getter
     return result.text || "I'm having trouble accessing my memory banks right now.";

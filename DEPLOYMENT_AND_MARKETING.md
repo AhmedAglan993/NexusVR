@@ -16,8 +16,15 @@ Vercel is the industry standard for React portfolios. It's free, fast, and gives
 ### Option B: Connect to GitHub (Professional)
 1. Push this project to a new GitHub Repository.
 2. Go to Vercel, click "Add New Project", and select your GitHub repo.
-3. Vercel will auto-detect "Vite" settings. Click **Deploy**.
-4. **Benefit:** Every time you push code changes to GitHub, your live site updates automatically.
+3. Vercel will auto-detect "Vite" settings.
+4. **IMPORTANT:** Before deploying, go to **Settings** → **Environment Variables** and add:
+   - **Key**: `GEMINI_API_KEY`
+   - **Value**: Your Gemini API key (get it from https://aistudio.google.com/app/apikey)
+   - **Environment**: Production (and Preview if needed)
+5. Click **Deploy**.
+6. **Benefit:** Every time you push code changes to GitHub, your live site updates automatically.
+
+**Note:** The `.env.local` file stays on your computer only. For production, you must set environment variables in your hosting platform's dashboard. See `ENV_SETUP.md` for detailed instructions.
 
 ---
 
