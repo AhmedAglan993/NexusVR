@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <footer className="bg-black py-8 border-t border-gray-900">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-600 text-sm font-mono">
-            © {new Date().getFullYear()} Ahmed Aglan. All rights reserved.
+            © {new Date().getFullYear()} Seqed XR. All rights reserved.
           </p>
         </div>
       </footer >
