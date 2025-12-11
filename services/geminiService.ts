@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai/web";
 import { PROJECTS, SKILLS } from "../constants";
 
 // Construct a system prompt based on the company data
@@ -49,11 +49,14 @@ let client: GoogleGenAI | null = null;
 
 export const getGeminiClient = (): GoogleGenAI => {
   if (!client) {
-    const apiKey = process.env.API_KEY;
+    // Try both environment variable names
+    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
     if (!apiKey) {
       console.error("API_KEY is missing from environment variables");
+      console.error("Available env vars:", Object.keys(process.env).filter(k => k.includes('API') || k.includes('GEMINI')));
       throw new Error("API Key missing");
     }
+    console.log("Initializing Gemini client with API key (length:", apiKey.length, ")");
     client = new GoogleGenAI({ apiKey });
   }
   return client;
@@ -63,25 +66,45 @@ export const sendMessageToGemini = async (message: string, history: { role: 'use
   try {
     const ai = getGeminiClient();
 
-    // We use generateContent for a single turn here for simplicity in this stateless example,
-    // but building a chat history context manually allows for the "Chat" feel without persistent session management complexity on frontend.
-    // However, the best practice for chat is ai.chats.create. Let's use that.
+    // Convert history to the correct Content[] format
+    const chatHistory = history.map(msg => ({
+      role: msg.role,
+      parts: msg.parts.map(p => ({ text: p.text }))
+    }));
 
+    // Create chat with system instruction and history
     const chat = ai.chats.create({
       model: 'gemini-2.5-flash',
       config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: {
+          parts: [{ text: SYSTEM_INSTRUCTION }]
+        }
       },
-      history: history
+      history: chatHistory
     });
 
-    const result = await chat.sendMessage({
-      message: message
-    });
+    // Send message - the message should be a PartListUnion (string or Part[])
+    const result = await chat.sendMessage(message);
 
+    // Extract text from response using the .text getter
     return result.text || "I'm having trouble accessing my memory banks right now.";
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Connection error. Please try again later.";
+  } catch (error: any) {
+    console.error("Gemini Error Details:", error);
+    console.error("Error message:", error?.message);
+    console.error("Error stack:", error?.stack);
+    
+    // Provide more specific error messages
+    if (error?.message?.includes("API key")) {
+      return "API key configuration error. Please check your environment variables.";
+    }
+    if (error?.message?.includes("quota") || error?.message?.includes("limit")) {
+      return "API quota exceeded. Please try again later.";
+    }
+    if (error?.message?.includes("network") || error?.message?.includes("fetch")) {
+      return "Network error. Please check your internet connection and try again.";
+    }
+    
+    // Return the actual error message for debugging
+    return `Connection error: ${error?.message || "Unknown error"}. Please check the console for details.`;
   }
 };
