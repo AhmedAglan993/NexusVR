@@ -49,12 +49,28 @@ let client: GoogleGenAI | null = null;
 
 export const getGeminiClient = (): GoogleGenAI => {
   if (!client) {
-    // Try both environment variable names
-    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    // Try multiple ways to get the API key
+    // 1. From process.env (replaced by Vite define at build time)
+    // 2. From import.meta.env (Vite's native way, requires VITE_ prefix)
+    const apiKey = 
+      process.env.API_KEY || 
+      process.env.GEMINI_API_KEY ||
+      (import.meta.env as any).VITE_GEMINI_API_KEY ||
+      (import.meta.env as any).GEMINI_API_KEY;
+    
+    // Debug logging
+    console.log("Checking for API key...");
+    console.log("process.env.API_KEY:", process.env.API_KEY ? `Found (length: ${process.env.API_KEY.length})` : "Not found");
+    console.log("process.env.GEMINI_API_KEY:", process.env.GEMINI_API_KEY ? `Found (length: ${process.env.GEMINI_API_KEY.length})` : "Not found");
+    console.log("import.meta.env.VITE_GEMINI_API_KEY:", (import.meta.env as any).VITE_GEMINI_API_KEY ? `Found` : "Not found");
+    
+    if (!apiKey || apiKey === 'undefined' || apiKey === 'null' || apiKey === '') {
       console.error("API_KEY is missing from environment variables");
-      console.error("Available env vars:", Object.keys(process.env).filter(k => k.includes('API') || k.includes('GEMINI')));
-      throw new Error("API Key missing");
+      console.error("This usually means:");
+      console.error("1. The .env.local file doesn't exist or doesn't contain GEMINI_API_KEY");
+      console.error("2. The dev server needs to be restarted after creating/updating .env.local");
+      console.error("3. The vite.config.ts define replacement isn't working");
+      throw new Error("API Key missing. Please ensure GEMINI_API_KEY is set in .env.local and restart the dev server.");
     }
     console.log("Initializing Gemini client with API key (length:", apiKey.length, ")");
     client = new GoogleGenAI({ apiKey });
