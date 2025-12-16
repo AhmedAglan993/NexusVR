@@ -15,8 +15,11 @@ const Navbar: React.FC = () => {
   return (
     <nav className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${scrolled ? 'glass-panel py-4 shadow-lg shadow-brand-primary/5' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold font-mono tracking-tighter text-white group">
-          SEQED<span className="text-brand-primary group-hover:text-white transition-colors">.GAMES</span>
+        <a href="#" className="flex flex-col items-center group ml-4">
+          <img src="/logo.png" alt="Seqed Games" className="h-20 w-auto" />
+          <span className="text-xs font-bold tracking-[0.3em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#D4A574] to-[#B8956A] group-hover:from-brand-primary group-hover:to-brand-primary transition-all">
+            SEQED GAMES
+          </span>
         </a>
 
         <div className="hidden md:flex gap-8">

@@ -1,0 +1,9 @@
+# Robots.txt for seqedgames.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://seqedgames.com/sitemap.xml
+
+# Disallow admin or private paths (none currently)
+# Disallow: /admin/
