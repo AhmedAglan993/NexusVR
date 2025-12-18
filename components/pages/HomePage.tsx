@@ -4,9 +4,7 @@ import Services from '../Services';
 import Projects from '../Projects';
 import Testimonials from '../Testimonials';
 import FAQ from '../FAQ';
-import Blog from '../Blog';
 import Contact from '../Contact';
-import { useLanguage } from '../../contexts/LanguageContext';
 
 const HomePage: React.FC = () => {
     return (
@@ -16,7 +14,6 @@ const HomePage: React.FC = () => {
             <Projects />
             <Testimonials />
             <FAQ />
-            <Blog />
             <Contact />
         </>
     );

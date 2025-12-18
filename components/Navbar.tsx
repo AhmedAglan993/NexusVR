@@ -92,6 +92,14 @@ const Navbar: React.FC = () => {
               </a>
             ))}
 
+            {/* Blog Link */}
+            <Link
+              to="/blog"
+              className="text-sm font-mono text-gray-400 hover:text-brand-primary transition-colors uppercase tracking-widest relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-brand-primary after:transition-all hover:after:w-full"
+            >
+              {t.nav.blog}
+            </Link>
+
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
@@ -142,6 +150,14 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </a>
               ))}
+              {/* Blog Link */}
+              <Link
+                to="/blog"
+                onClick={closeMobileMenu}
+                className="text-lg font-mono text-white hover:text-brand-primary transition-colors uppercase tracking-widest py-2 border-b border-white/10"
+              >
+                {t.nav.blog}
+              </Link>
             </div>
           </div>
         </div>

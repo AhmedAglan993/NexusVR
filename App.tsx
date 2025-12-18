@@ -6,6 +6,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './components/pages/HomePage';
 import ServicePage from './components/pages/ServicePage';
+import BlogPage from './components/pages/BlogPage';
 import BlogPostPage from './components/pages/BlogPostPage';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 
@@ -20,6 +21,7 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services/:slug" element={<ServicePage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
       </Routes>
 
