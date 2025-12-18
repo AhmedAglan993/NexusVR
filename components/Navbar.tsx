@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t, language, setLanguage, isRTL } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +29,38 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  // Check if we're on the homepage
+  const isHomePage = location.pathname === '/';
+
+  // Handle navigation - if on homepage, scroll to section; if not, navigate to home then section
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    closeMobileMenu();
+
+    if (isHomePage) {
+      // Just scroll to the section
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page with hash
+      navigate('/' + href);
+    }
+  };
+
+  // Scroll to section if navigated with hash
+  useEffect(() => {
+    if (location.hash && isHomePage) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.hash, isHomePage]);
+
   const navLinks = [
     { name: t.nav.home, href: '#home' },
     { name: t.nav.services, href: '#services' },
@@ -38,19 +73,20 @@ const Navbar: React.FC = () => {
     <>
       <nav className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${scrolled ? 'glass-panel py-4 shadow-lg shadow-brand-primary/5' : 'bg-transparent py-6'}`}>
         <div className={`container mx-auto px-6 flex justify-between items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <a href="#" className={`flex flex-col items-center group ${isRTL ? 'mr-4' : 'ml-4'}`}>
+          <Link to="/" className={`flex flex-col items-center group ${isRTL ? 'mr-4' : 'ml-4'}`}>
             <img src="/logo.png" alt="Seqed Games" className="h-12 md:h-20 w-auto" />
             <span className="text-xs font-bold tracking-[0.3em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#D4A574] to-[#B8956A] group-hover:from-brand-primary group-hover:to-brand-primary transition-all">
               SEQED GAMES
             </span>
-          </a>
+          </Link>
 
           <div className={`hidden md:flex gap-8 items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
             {navLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-mono text-gray-400 hover:text-brand-primary transition-colors uppercase tracking-widest relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-brand-primary after:transition-all hover:after:w-full"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-sm font-mono text-gray-400 hover:text-brand-primary transition-colors uppercase tracking-widest relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-brand-primary after:transition-all hover:after:w-full cursor-pointer"
               >
                 {link.name}
               </a>
@@ -100,8 +136,8 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={closeMobileMenu}
-                  className="text-lg font-mono text-white hover:text-brand-primary transition-colors uppercase tracking-widest py-2 border-b border-white/10"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-lg font-mono text-white hover:text-brand-primary transition-colors uppercase tracking-widest py-2 border-b border-white/10 cursor-pointer"
                 >
                   {link.name}
                 </a>

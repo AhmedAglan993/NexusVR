@@ -1,11 +1,12 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Services from './components/Services';
-import Hero from './components/Hero';
-import Projects from './components/Projects';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
 import AIChatBot from './components/AIChatBot';
+import WhatsAppButton from './components/WhatsAppButton';
+import ScrollToTop from './components/ScrollToTop';
+import HomePage from './components/pages/HomePage';
+import ServicePage from './components/pages/ServicePage';
+import BlogPostPage from './components/pages/BlogPostPage';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 
 const AppContent: React.FC = () => {
@@ -13,14 +14,14 @@ const AppContent: React.FC = () => {
 
   return (
     <div className={`min-h-screen relative ${isRTL ? 'font-arabic' : ''}`}>
+      <ScrollToTop />
       <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <Projects />
-        <Testimonials />
-        <Contact />
-      </main>
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services/:slug" element={<ServicePage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+      </Routes>
 
       {/* Footer */}
       <footer className="bg-black py-8 border-t border-gray-900">
@@ -31,7 +32,8 @@ const AppContent: React.FC = () => {
         </div>
       </footer>
 
-      {/* The Digital Twin Assistant */}
+      {/* Floating Buttons */}
+      <WhatsAppButton />
       <AIChatBot />
     </div>
   );
@@ -39,9 +41,11 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <BrowserRouter>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </BrowserRouter>
   );
 };
 

@@ -16,6 +16,20 @@ export interface ProjectItem {
     description: string;
 }
 
+export interface FAQItem {
+    question: string;
+    answer: string;
+}
+
+export interface BlogPost {
+    id: string;
+    title: string;
+    excerpt: string;
+    category: string;
+    date: string;
+    readTime: string;
+}
+
 export interface Translations {
     lang: string;
     dir: string;
@@ -25,6 +39,7 @@ export interface Translations {
         portfolio: string;
         clients: string;
         contact: string;
+        blog: string;
     };
     hero: {
         tagline: string;
@@ -33,6 +48,7 @@ export interface Translations {
         subtitle: string;
         ctaPrimary: string;
         ctaSecondary: string;
+        ctaConsultation: string;
         stats: StatItem[];
     };
     services: {
@@ -94,6 +110,49 @@ export interface Translations {
     languageSwitcher: {
         switchTo: string;
     };
+    whatsapp: {
+        tooltip: string;
+    };
+    faq: {
+        sectionTag: string;
+        title: string;
+        titleHighlight: string;
+        subtitle: string;
+        ctaText: string;
+        ctaButton: string;
+        items: FAQItem[];
+    };
+    blog: {
+        sectionTag: string;
+        title: string;
+        titleHighlight: string;
+        subtitle: string;
+        readMore: string;
+        allPosts: string;
+        categories: {
+            all: string;
+            gameDev: string;
+            branding: string;
+            industry: string;
+        };
+        comingSoon: string;
+        comingSoonText: string;
+    };
+    consultation: {
+        badge: string;
+        title: string;
+        subtitle: string;
+        ctaButton: string;
+    };
+    servicePage: {
+        backToHome: string;
+        whatWeDeliver: string;
+        ourProcess: string;
+        readyToStart: string;
+        readyToStartText: string;
+        whatsapp: string;
+        contactForm: string;
+    };
 }
 
 export const en: Translations = {
@@ -108,20 +167,22 @@ export const en: Translations = {
         portfolio: 'Portfolio',
         clients: 'OUR CLIENTS',
         contact: 'Contact',
+        blog: 'Blog',
     },
 
     // Hero Section
     hero: {
         tagline: 'Est. 2025 • Cairo • Riyadh',
-        title: 'WE BUILD',
-        titleHighlight: 'GAMES FOR BRANDS',
+        title: 'GAMES BUILT',
+        titleHighlight: 'TO LAST',
         subtitle: 'specializes in game development for brands, agencies, and businesses. We create games that drive engagement, not just entertainment.',
         ctaPrimary: 'Explore Services',
         ctaSecondary: 'Start Project',
+        ctaConsultation: 'Free Consultation',
         stats: [
-            { value: 'Games', label: 'For Brands & Agencies' },
+            { value: 'Coming', label: 'Clients Soon' },
             { value: 'MENA', label: 'Regional Expertise' },
-            { value: 'Our', label: 'Clients' },
+            { value: '2+', label: 'Countries Served' },
             { value: 'Results', label: 'Driven by Data' },
         ],
     },
@@ -236,4 +297,79 @@ export const en: Translations = {
     languageSwitcher: {
         switchTo: 'عربي',
     },
+
+    // WhatsApp
+    whatsapp: {
+        tooltip: 'Chat with us on WhatsApp',
+    },
+
+    // FAQ Section
+    faq: {
+        sectionTag: 'FAQ',
+        title: 'Frequently Asked',
+        titleHighlight: 'Questions',
+        subtitle: 'Find answers to common questions about our game development services',
+        ctaText: 'Still have questions?',
+        ctaButton: 'Free Consultation',
+        items: [
+            {
+                question: 'What types of games do you develop?',
+                answer: 'We specialize in branded games, advergames, serious games for training, and game development for marketing agencies. We work with Unity, Unreal Engine, and web technologies to deliver games for mobile, web, and desktop platforms.',
+            },
+            {
+                question: 'How long does it take to develop a game?',
+                answer: 'Project timelines vary based on complexity. A simple web-based advergame might take 1-2 weeks, while a full mobile game can take 3-6 months. We provide detailed timelines during our free consultation.',
+            },
+            {
+                question: 'Do you work with clients outside the MENA region?',
+                answer: 'Yes! While we specialize in the MENA market, we work with clients globally. Our expertise in cultural localization is valuable for any company looking to expand into Middle Eastern markets.',
+            },
+            {
+                question: 'What is your pricing model?',
+                answer: 'We offer flexible pricing based on project scope. We can work on fixed-price projects with clear deliverables, or on a retainer basis for ongoing partnerships. Contact us for a custom quote.',
+            },
+            {
+                question: 'Can you help with game marketing and launch?',
+                answer: 'While our core focus is development, we partner with marketing agencies and can advise on launch strategies. We also offer ongoing support and analytics integration to measure your game\'s success.',
+            },
+        ],
+    },
+
+    // Blog Section
+    blog: {
+        sectionTag: 'Insights',
+        title: 'GAME DEV',
+        titleHighlight: 'BLOG',
+        subtitle: 'Industry insights, case studies, and thought leadership from our team',
+        readMore: 'Read More',
+        allPosts: 'All Posts',
+        categories: {
+            all: 'All',
+            gameDev: 'Game Development',
+            branding: 'Brand Gaming',
+            industry: 'Industry News',
+        },
+        comingSoon: 'Blog Coming Soon',
+        comingSoonText: 'We\'re preparing insightful articles about game development, brand gaming, and industry trends. Check back soon!',
+    },
+
+    // Consultation CTA
+    consultation: {
+        badge: 'Limited Spots Available',
+        title: 'Book Your Free Consultation',
+        subtitle: 'Discuss your project with our game development experts. No commitment required.',
+        ctaButton: 'Schedule Now',
+    },
+
+    // Service Page
+    servicePage: {
+        backToHome: 'Back to Home',
+        whatWeDeliver: 'What We Deliver',
+        ourProcess: 'Our Process',
+        readyToStart: 'Ready to Start?',
+        readyToStartText: 'Contact us today to discuss your project and get a free consultation',
+        whatsapp: 'WhatsApp',
+        contactForm: 'Contact Form',
+    },
 };
+
