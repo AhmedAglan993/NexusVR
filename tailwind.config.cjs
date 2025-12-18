@@ -18,6 +18,7 @@ module.exports = {
             fontFamily: {
                 sans: ['Outfit', 'sans-serif'],
                 mono: ['Space Mono', 'monospace'],
+                arabic: ['Cairo', 'Outfit', 'sans-serif'],
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

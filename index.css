@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -74,6 +74,20 @@
 
   .neon-border {
     box-shadow: 0 0 5px var(--color-brand-primary), inset 0 0 5px var(--color-brand-primary);
+  }
+
+  /* Arabic Font Class */
+  .font-arabic {
+    font-family: 'Cairo', 'Outfit', sans-serif;
+  }
+
+  .font-arabic h1,
+  .font-arabic h2,
+  .font-arabic h3,
+  .font-arabic h4,
+  .font-arabic h5,
+  .font-arabic h6 {
+    font-family: 'Cairo', 'Space Mono', monospace;
   }
 }
 

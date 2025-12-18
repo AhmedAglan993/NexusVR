@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Background Elements */}
@@ -15,50 +18,47 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-6 z-10 relative flex flex-col items-center text-center">
         <div className="inline-block mb-6 px-4 py-1.5 border border-brand-primary/30 rounded-full bg-brand-primary/5 backdrop-blur-md animate-float">
-          <span className="text-brand-primary font-mono text-xs md:text-sm tracking-[0.2em] uppercase">Est. 2025 • Cairo • Riyadh</span>
+          <span className="text-brand-primary font-mono text-xs md:text-sm tracking-[0.2em] uppercase">{t.hero.tagline}</span>
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tighter text-white leading-[1.1]">
-          WE BUILD <br />
+          {t.hero.title} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary via-white to-brand-secondary text-glow filter drop-shadow-lg">
-            GAMES FOR BRANDS
+            {t.hero.titleHighlight}
           </span>
         </h1>
 
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-          <strong className="text-white">Seqed Games</strong> specializes in game development for brands, agencies, and businesses. 
-          We create games that drive engagement, not just entertainment.
+          <strong className="text-white">Seqed Games</strong> {t.hero.subtitle}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto">
+        <div className={`flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
           <a
             href="#services"
             className="group relative px-8 py-4 bg-brand-primary text-black font-bold text-sm tracking-widest uppercase rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.5)]"
           >
             <div className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-out skew-x-12 opacity-50"></div>
-            <span className="relative z-10">Explore Services</span>
+            <span className="relative z-10">{t.hero.ctaPrimary}</span>
           </a>
           <a
             href="#contact"
             className="px-8 py-4 border border-white/20 hover:border-brand-primary/50 text-white font-mono text-sm tracking-widest uppercase rounded-sm transition-all duration-300 hover:bg-white/5"
           >
-            Start Project
+            {t.hero.ctaSecondary}
           </a>
         </div>
 
         {/* Floating Stats */}
         <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl mx-auto">
-          {[
-            { value: 'Games', label: 'For Brands & Agencies', color: 'border-brand-secondary' },
-            { value: 'MENA', label: 'Regional Expertise', color: 'border-brand-primary' },
-            { value: 'Our', label: 'Clients', color: 'border-white' },
-            { value: 'Results', label: 'Driven by Data', color: 'border-gray-500' }
-          ].map((stat, index) => (
-            <div key={index} className={`glass-card p-6 border-l-2 ${stat.color} text-left group hover:-translate-y-1 duration-300`}>
-              <div className="text-3xl font-mono font-bold text-white mb-1 group-hover:text-brand-primary transition-colors">{stat.value}</div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider font-mono">{stat.label}</div>
-            </div>
-          ))}
+          {t.hero.stats.map((stat, index) => {
+            const colors = ['border-brand-secondary', 'border-brand-primary', 'border-white', 'border-gray-500'];
+            return (
+              <div key={index} className={`glass-card p-6 border-l-2 ${isRTL ? 'border-l-0 border-r-2' : ''} ${colors[index]} ${isRTL ? 'text-right' : 'text-left'} group hover:-translate-y-1 duration-300`}>
+                <div className="text-3xl font-mono font-bold text-white mb-1 group-hover:text-brand-primary transition-colors">{stat.value}</div>
+                <div className="text-xs text-gray-400 uppercase tracking-wider font-mono">{stat.label}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
