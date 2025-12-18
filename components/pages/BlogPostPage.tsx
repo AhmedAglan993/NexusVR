@@ -31,7 +31,7 @@ const BlogPostPage: React.FC = () => {
                     <h1 className="text-4xl font-bold text-white mb-4">
                         {language === 'ar' ? 'المقال غير موجود' : 'Post Not Found'}
                     </h1>
-                    <Link to="/#blog" className="text-brand-primary hover:underline">
+                    <Link to="/blog" className="text-brand-primary hover:underline">
                         ← {language === 'ar' ? 'العودة للمدونة' : 'Back to Blog'}
                     </Link>
                 </div>
@@ -57,7 +57,7 @@ const BlogPostPage: React.FC = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     {/* Back Link */}
                     <Link
-                        to="/#blog"
+                        to="/blog"
                         className={`inline-flex items-center gap-2 text-gray-400 hover:text-brand-primary transition-colors mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}
                     >
                         <i className={`fa-solid ${isRTL ? 'fa-arrow-right' : 'fa-arrow-left'}`}></i>
