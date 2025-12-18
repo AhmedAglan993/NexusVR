@@ -67,20 +67,75 @@ const AIChatBot: React.FC = () => {
     }
   }, []);
 
+  // Detect if text is primarily Arabic
+  const isArabicText = (text: string): boolean => {
+    // Count Arabic characters (Arabic Unicode range: 0600-06FF, 0750-077F, 08A0-08FF)
+    const arabicChars = text.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/g);
+    const arabicCount = arabicChars ? arabicChars.length : 0;
+    // If more than 30% of non-space characters are Arabic, treat as Arabic
+    const totalChars = text.replace(/\s/g, '').length;
+    return totalChars > 0 && arabicCount / totalChars > 0.3;
+  };
+
+  // Clean text for speech (remove markdown formatting and special characters)
+  const cleanTextForSpeech = (text: string): string => {
+    return text
+      // Remove markdown bold/italic markers
+      .replace(/\*\*([^*]+)\*\*/g, '$1')  // **bold** -> bold
+      .replace(/\*([^*]+)\*/g, '$1')      // *italic* -> italic
+      .replace(/__([^_]+)__/g, '$1')      // __bold__ -> bold
+      .replace(/_([^_]+)_/g, '$1')        // _italic_ -> italic
+      // Remove markdown headers
+      .replace(/#{1,6}\s*/g, '')
+      // Remove markdown links but keep text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Remove bullet points and numbered lists
+      .replace(/^[\s]*[-•*]\s*/gm, '')
+      .replace(/^[\s]*\d+\.\s*/gm, '')
+      // Remove emojis
+      .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F700}-\u{1F77F}]|[\u{1F780}-\u{1F7FF}]|[\u{1F800}-\u{1F8FF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA00}-\u{1FA6F}]|[\u{1FA70}-\u{1FAFF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '')
+      // Remove special characters that shouldn't be spoken but keep Arabic/English letters, numbers, and basic punctuation
+      .replace(/[`~@#$%^&()_+=[\]{}|\\<>/]/g, '')
+      // Normalize multiple spaces
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
+
   const speak = (text: string) => {
     if (!('speechSynthesis' in window)) return;
 
     // Stop any current speech
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    // Try to find a good "tech" voice (usually Google US English or Microsoft Mark)
-    const voices = window.speechSynthesis.getVoices();
-    const techVoice = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.name.includes('Microsoft Mark')) || voices[0];
+    // Clean the text for natural speech
+    const cleanedText = cleanTextForSpeech(text);
+    if (!cleanedText) return;
 
-    if (techVoice) utterance.voice = techVoice;
-    utterance.pitch = 1; // Slightly lower for AI feel? Maybe 0.9. Default is 1.
-    utterance.rate = 1.1; // Slightly faster
+    // Detect if the text is Arabic
+    const isArabic = isArabicText(cleanedText);
+
+    const utterance = new SpeechSynthesisUtterance(cleanedText);
+    const voices = window.speechSynthesis.getVoices();
+
+    if (isArabic) {
+      // Find an Arabic voice
+      const arabicVoice = voices.find(v => v.lang.startsWith('ar')) ||
+        voices.find(v => v.name.toLowerCase().includes('arabic')) ||
+        voices[0];
+      if (arabicVoice) utterance.voice = arabicVoice;
+      utterance.lang = 'ar-SA';  // Arabic (Saudi Arabia) or ar-EG for Egyptian
+    } else {
+      // Find an English voice
+      const englishVoice = voices.find(v => v.name.includes('Google US English')) ||
+        voices.find(v => v.name.includes('Microsoft Mark')) ||
+        voices.find(v => v.lang.startsWith('en')) ||
+        voices[0];
+      if (englishVoice) utterance.voice = englishVoice;
+      utterance.lang = 'en-US';
+    }
+
+    utterance.pitch = 1;
+    utterance.rate = isArabic ? 1.0 : 1.1;  // Slightly slower for Arabic
 
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
