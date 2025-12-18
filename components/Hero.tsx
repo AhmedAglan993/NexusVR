@@ -5,7 +5,7 @@ const Hero: React.FC = () => {
   const { t, isRTL } = useLanguage();
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 md:pt-20">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 bg-brand-dark">
         {/* Cyber Grid */}
